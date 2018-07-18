@@ -20,7 +20,12 @@
 #include "cadp.h"          // CaDP;
 #include "configf.h"       // Configf;
 #include "coupling.h"      // Coupling;
+#include "coupling_arctan.h" // CouplingArctan;
 #include "coupling_diff_arctan.h" // CouplingDiffArctan;
+#include "coupling_diff_arctan_conditional.h" // CouplingDiffArctanConditional (DAC);
+#include "coupling_parabola.h" // CouplingParabola;
+#include "coupling_parabola_negative.h" // CouplingParabolaNegative;
+#include "coupling_parabola_continuous.h" // CouplingParabolaNegative;
 #include "coupling_ramp.h" // CouplingRamp;
 #include "harmonic.h"      // Harmonic;
 #include "harmonic_integral.h" // HarmonicIntegral;
@@ -212,7 +217,23 @@ void Solver::init( Configf& configf ) {
     } else if(ctype=="DiffArctan") {
       couplings.add( new
                    CouplingDiffArctan(nodes,deltat,i, *propagators[i], *pops[cnt.post[i]], tempf ) );
-    } else {
+    } else if(ctype=="DAC") {
+      couplings.add( new
+                   CouplingDiffArctanConditional(nodes,deltat,i, *propagators[i], *pops[cnt.post[i]], tempf ) );
+    }else if(ctype=="Arctan") {
+      couplings.add( new
+                   CouplingArctan(nodes,deltat,i, *propagators[i], *pops[cnt.post[i]], tempf ) );
+    }else if(ctype=="Parabola") {
+      couplings.add( new
+                   CouplingParabola(nodes,deltat,i, *propagators[i], *pops[cnt.post[i]], tempf ) );
+    }else if(ctype=="ParabolaNegative") {
+      couplings.add( new
+                   CouplingParabolaNegative(nodes,deltat,i, *propagators[i], *pops[cnt.post[i]], tempf ) );
+    }else if(ctype=="ParabolaContinuous") {
+      couplings.add( new
+                   CouplingParabolaContinuous(nodes,deltat,i, *propagators[i], *pops[cnt.post[i]], tempf ) );
+    }
+    else {
       cerr<<"Invalid coupling type '"<<ctype<<"'."<<endl;
       exit(EXIT_FAILURE);
     }

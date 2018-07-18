@@ -138,7 +138,7 @@ void CouplingParabola::init( Configf& configf ) {
   time = 0;
 }
 
-void CouplingParabola::step(void) {
+void CouplingParabola::step() {
   // Return the right value at each time point
   time += deltat;
 
@@ -166,5 +166,5 @@ CouplingParabola::CouplingParabola( size_type nodes, double deltat, size_type in
   time_tot = tempf;
 }
 
-CouplingParabola::~CouplingParabola(void) {
+CouplingParabola::~CouplingParabola() {
 }

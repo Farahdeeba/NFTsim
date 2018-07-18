@@ -1,8 +1,8 @@
-/** @file coupling_diff_arctan.cpp
+/** @file coupling_diff_arctan_conditional.cpp
   @brief A new Coupling class, where nu_ab follows a smooth function.
 
   The smooth variation of nu_ab is defined by the difference of
-  two arctangent functions.
+  two arctangent functions and can be stopped at any time.
 
 
   @author Farah Deeba,

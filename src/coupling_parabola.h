@@ -21,8 +21,8 @@
 #include <vector> // std::vector;
 
 class CouplingParabola : public Coupling {
-  CouplingParabola();
-  CouplingParabola(CouplingParabola&);
+  //CouplingParabola();
+  //CouplingParabola(CouplingParabola&);
  protected:
   double t_start, t_mid, t_end;
   double nu_start, nu_mid, nu_end;
@@ -42,13 +42,26 @@ class CouplingParabola : public Coupling {
   std::vector<double> deltanu;   
      
      
-public:
-  void init( Configf& configf );
-  void step(void);
-  void find(void);
+//public:
+    
+  //void init( Configf& configf );
+  //void step(void);
+ // void find(void);
+  //CouplingParabola( size_type nodes, double deltat, size_type index,
+                 //   const Propagator& prepropag, const Population& postpop, double tempf );
+  //virtual ~CouplingParabola(void);
+//};
+
+ public:
+ CouplingParabola() = delete;                          // No default constructor allowed.
+  CouplingParabola(const CouplingParabola&) = delete; // No copy constructor allowed.
+
+  void init( Configf& configf ) override;
+  void step() override;
+  void find();
   CouplingParabola( size_type nodes, double deltat, size_type index,
                     const Propagator& prepropag, const Population& postpop, double tempf );
-  virtual ~CouplingParabola(void);
+  virtual ~CouplingParabola() override;
 };
 
 #endif //COUPLING_PARABOLA_H
