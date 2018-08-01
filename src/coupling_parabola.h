@@ -25,6 +25,7 @@ class CouplingParabola : public Coupling {
   //CouplingParabola(CouplingParabola&);
  protected:
   double t_start, t_mid, t_end;
+  double t_start_mag, t_mid_mag, t_end_mag;
   double nu_start, nu_mid, nu_end;
   double Arry[3][3];
   double nu_min = 0.0, nu_max = 0.0;
@@ -37,6 +38,7 @@ class CouplingParabola : public Coupling {
   double time_tot;
   double para_nu_min = 0.0,  para_nu_max = 0.0;
   double time = 0.0;
+  double time_increament = 0.0;
   double time_int = 0.0;
   std::vector<double> temp_i, temp_f;
   std::vector<double> deltanu;   

@@ -100,20 +100,34 @@ void CouplingParabola::init( Configf& configf ) {
   time_Arry[1]= Arry_inv[1][0]*nu_start+Arry_inv[1][1]*nu_mid+Arry_inv[1][2]*nu_end;
   time_Arry[2]= Arry_inv[2][0]*nu_start+Arry_inv[2][1]*nu_mid+Arry_inv[2][2]*nu_end;
   
-
+//cout<< time_Arry[0]<<"\n";
+//cout<< time_Arry[1]<<"\n";
+//cout<< time_Arry[2]<<"\n";
   
   
- //pre-compute the profile
-  
-  for( int i=t_start; i<t_end; i++ ) {
-      para_nu = time_Arry[0]*pow(i,2)+ time_Arry[1]*(i);
+  //pre-compute the profile to find the min and max
+  t_start_mag=t_start*10;///deltat;
+  t_end_mag=t_end*10;//deltat;
+  int j;
+  for( int i=t_start_mag; i<=t_end_mag; i++ ) {
+      j=i/10;//*deltat;
+      para_nu = time_Arry[0]*pow(j,2)+ time_Arry[1]*(j);
     deltanu.push_back(para_nu);
+    //cout<<para_nu<<"\n";
       }
+  
+  //for( int i=t_start; i<=t_end; i++ ) {
+    //  para_nu = time_Arry[0]*pow(i,2)+ time_Arry[1]*(i);
+    //deltanu.push_back(para_nu);
+      //}
   
   //min and max value -  standardise values between 0 and 1
   
   para_nu_min=*std::min_element(deltanu.begin(), deltanu.end());
   para_nu_max=*std::max_element(deltanu.begin(), deltanu.end());
+  
+  cout<< para_nu_min<<"\n";
+  cout<< para_nu_max;
  
   nu.clear();
   nu.resize(nodes, nu_min);
